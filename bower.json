@@ -1,0 +1,34 @@
+{
+  "name": "wamw-store",
+  "version": "0.0.1",
+  "description": "Data store for Polymer",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "store"
+  ],
+  "authors": [
+    "suttang <takahiro.suzuki@wamw.jp>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wamw/wamw-store.git"
+  },
+  "main": "wamw-store.html",
+  "homepage": "https://github.com/wamw/wamw-store",
+  "license": "MIT",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "devDependencies": {
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+    "web-component-tester": "^4.0.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

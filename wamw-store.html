@@ -1,0 +1,82 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="wamw-store">
+  <script>
+    (function() {
+      var store = {};
+      var signals = [];
+
+      Polymer({
+        is: 'wamw-store',
+        properties: {
+          /**
+           * item key
+           */
+          name: {
+            type: String,
+            value: ''
+          },
+          /**
+           * The data associated with this storage.
+           */
+          value: {
+            type: Object,
+            notify: true
+          },
+        },
+
+        observers: [
+          '_tryStoreValue(value.*)'
+        ],
+
+        ready() {
+          if (! store[this.name]) {
+            store[this.name] = {};
+          }
+          this._boundHandleStore = this._handleStore.bind(this);
+        },
+
+        _handleStore(event) {
+          console.log('- RECEIVE CHANGE EVENT: [' + this.id + ']');
+          if (this.value === store[this.name]) {
+            console.log('- 😀 RECEIVED DATA is SAME as MIME');
+            return;
+          }
+          console.log('- ❗️ SET DATA to my STORE');
+
+          this.set('value', event.detail);
+          this.fire('changed', event.detail);
+        },
+
+        attached: function() {
+          signals.push(this);
+          this.addEventListener('wamw-store-value-changed-' + this.name, this._boundHandleStore);
+        },
+
+        detached: function() {
+          const i = signals.indexOf(this);
+          if (i >= 0) {
+            signals.splice(i, 1);
+          }
+          this.removeEventListener('wamw-store-value-changed-' + this.name, this._boundHandleStore);
+        },
+
+        _tryStoreValue(value) {
+          console.log('TRY TO STORE VALUE: [' + this.id + ']');
+
+          store[this.name] = this.value;
+
+          // Dispatch the event.
+          const signal = new CustomEvent('wamw-store-value-changed-' + this.name, {
+            bubbles: false,
+            detail: store[this.name],
+          });
+          console.log('DISPATCH CHANGE EVENT for ALL STORES');
+          for (let s of signals) {
+            s.dispatchEvent(signal);
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>

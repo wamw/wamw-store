@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>wamw-store demo</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../wamw-store.html">
+  </head>
+  <body>
+
+    <h1>Message Sender</h1>
+    <template is="dom-bind" id="messageSender">
+      <wamw-store name="message" value="{{messageData}}" id="senderMessageStore"></wamw-store>
+      <p>message: <input type="text" value="{{messageData::keyup}}"></p>
+    </template>
+
+    <h1>Check Sender</h1>
+    <template is="dom-bind" id="sender">
+      <wamw-store name="checked" value="{{checkedData}}" id="senderCheckedStore"></wamw-store>
+      <p><label>check: <input type="checkbox" checked="{{checkedData::change}}"></label></p>
+    </template>
+
+    <h1>Receiver</h1>
+    <template is="dom-bind" id="receiver">
+      <wamw-store name="message" value="{{receiverMessageData}}" id="receiverMessageStore"></wamw-store>
+      <wamw-store name="checked" value="{{receiverCheckedData}}" id="receiverCheckedStore"></wamw-store>
+      <p>sender text is: {{receiverMessageData}}</p>
+      <p>is checked: {{receiverCheckedData}}</p>
+    </template>
+
+  </body>
+</html>
