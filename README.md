@@ -1,6 +1,12 @@
-# <wamw-store>
+# &lt;wamw-store&gt;
 
 `wamw-store` provides simple shared storage.
+
+## Installation
+
+```
+bower install --save wamw/wamw-store
+```
 
 
 ## Usage
